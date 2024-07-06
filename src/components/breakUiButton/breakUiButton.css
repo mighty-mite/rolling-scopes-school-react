@@ -1,0 +1,15 @@
+.break {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  border-radius: 1000px;
+  width: 75px;
+  height: 75px;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(151, 212, 242);
+}
+
+.break.error {
+  background-color: red;
+}
