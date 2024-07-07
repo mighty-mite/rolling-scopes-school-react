@@ -15,7 +15,7 @@ class BreakUiButton extends Component<object, State> {
 
   componentDidUpdate(prevProps: object, prevState: State): void {
     const { error } = this.state;
-    if (error !== prevState.error) throw new Error("hey");
+    if (error !== prevState.error) throw new Error("error");
   }
 
   handleClick() {
