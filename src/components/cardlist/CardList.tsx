@@ -38,10 +38,7 @@ function CardList(props: IProps) {
 
   useEffect(() => {
     setLoading(true);
-    service.searchProducts(onSearch).then(data => {
-      setCards(data);
-      setLoading(false);
-    });
+    service.searchProducts(onSearch).then(onCardsLoaded);
   }, [onSearch, service]);
 
   const content = cards.map(item => {

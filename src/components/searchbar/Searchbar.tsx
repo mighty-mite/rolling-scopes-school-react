@@ -1,50 +1,41 @@
 import "./searchbar.css";
 
-import { Component } from "react";
+import { useEffect, useState } from "react";
 
 interface IProps {
   onType: (query: string) => void;
 }
 
-class Searchbar extends Component<IProps> {
-  state = {
-    text: "",
-  };
+function Searchbar(props: IProps) {
+  const [text, setText] = useState("");
 
-  componentDidMount() {
-    this.setState({ text: localStorage.getItem("search") });
-  }
+  useEffect(() => {
+    setText(localStorage.getItem("search") || "");
+  }, [text]);
 
-  handleClick = (e: { preventDefault: () => void }) => {
+  const handleClick = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const { onType } = this.props;
-    const { text } = this.state;
+    const { onType } = props;
     onType(text);
   };
 
-  render() {
-    const { text } = this.state;
-
-    return (
-      <form className="searchbar">
-        <input
-          value={text}
-          type="text"
-          className="search-input"
-          placeholder="type here"
-          onChange={e =>
-            this.setState(() => {
-              localStorage.setItem("search", e.target.value);
-              return { text: e.target.value };
-            })
-          }
-        />
-        <button type="submit" onClick={this.handleClick}>
-          Search
-        </button>
-      </form>
-    );
-  }
+  return (
+    <form className="searchbar">
+      <input
+        value={text}
+        type="text"
+        className="search-input"
+        placeholder="type here"
+        onChange={e => {
+          localStorage.setItem("search", e.target.value);
+          setText(e.target.value);
+        }}
+      />
+      <button type="submit" onClick={handleClick}>
+        Search
+      </button>
+    </form>
+  );
 }
 
 export default Searchbar;
