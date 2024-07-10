@@ -14,32 +14,32 @@ interface ICard {
 }
 
 interface IProps {
-  onSearch: string;
+  searchQuery: string;
 }
 
 function CardList(props: IProps) {
-  const { onSearch } = props;
+  const { searchQuery } = props;
   const service = useMemo(() => new Service(), []);
   const [cards, setCards] = useState<ICard[]>([]);
   const [loading, setLoading] = useState(true);
-  const [text] = useState(localStorage.getItem("search") || "");
+  const [text] = useState(localStorage.getItem("search") ?? "");
 
   const onCardsLoaded = (cards: ICard[]) => {
-    setCards(cards);
     setLoading(false);
+    setCards(cards);
   };
 
   useEffect(() => {
     const onRequest = () => {
-      service.searchProducts(text).then(onCardsLoaded);
+      service.searchProducts(text).then(data => onCardsLoaded(data));
     };
     onRequest();
   }, [text, service]);
 
   useEffect(() => {
     setLoading(true);
-    service.searchProducts(onSearch).then(onCardsLoaded);
-  }, [onSearch, service]);
+    service.searchProducts(searchQuery).then(data => onCardsLoaded(data));
+  }, [searchQuery, service]);
 
   const content = cards.map(item => {
     return (

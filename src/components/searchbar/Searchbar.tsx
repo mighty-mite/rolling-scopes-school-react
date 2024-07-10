@@ -10,7 +10,7 @@ function Searchbar(props: IProps) {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    setText(localStorage.getItem("search") || "");
+    setText(localStorage.getItem("search") ?? "");
   }, [text]);
 
   const handleClick = (e: { preventDefault: () => void }) => {

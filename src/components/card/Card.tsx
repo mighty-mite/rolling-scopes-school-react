@@ -11,7 +11,7 @@ function Card(props: Props) {
   return (
     <li className="card">
       <img className="card__image" src={thumbnail} width="100" alt={title} />
-      <div className="card__name">{title}</div>
+      <h4 className="card__name">{title}</h4>
       <div className="card__description">{description}</div>
     </li>
   );

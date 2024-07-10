@@ -13,7 +13,7 @@ export default function App() {
   return (
     <div className="app">
       <Searchbar onType={onType} />
-      <CardList onSearch={text} />
+      <CardList searchQuery={text} />
     </div>
   );
 }
