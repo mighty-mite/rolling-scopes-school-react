@@ -1,8 +1,10 @@
 import "./cardlist.css";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import Card from "../card/Card";
+import Pagination from "../pagination/Pagination";
 import Service from "../service/Service";
 import Spinner from "../spinner/Spinner";
 
@@ -23,6 +25,11 @@ function CardList(props: IProps) {
   const [cards, setCards] = useState<ICard[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [offset, setOffset] = useState(0);
+  const [numberOfPages, setNumberOfPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [, setSearchParams] = useSearchParams();
+
   const onCardsLoaded = (cards: ICard[]) => {
     setLoading(false);
     setCards(cards);
@@ -30,10 +37,20 @@ function CardList(props: IProps) {
 
   useEffect(() => {
     setLoading(true);
-    service
-      .searchProducts(searchQuery)
-      .then((data: ICard[]) => onCardsLoaded(data));
-  }, [searchQuery, service]);
+    service.searchProducts(searchQuery, offset).then(data => {
+      onCardsLoaded(data.products);
+      console.log(data.total);
+      setNumberOfPages(Math.ceil(data.total / 10));
+      setSearchParams({ page: String(currentPage) });
+    });
+  }, [
+    searchQuery,
+    service,
+    numberOfPages,
+    setSearchParams,
+    currentPage,
+    offset,
+  ]);
 
   const content = cards.map(item => {
     return (
@@ -47,6 +64,11 @@ function CardList(props: IProps) {
     );
   });
 
+  const handlePageNums = (pageNumber: number) => {
+    setOffset(pageNumber * 10 - 10);
+    setCurrentPage(pageNumber);
+  };
+
   const spinner = loading ? <Spinner /> : null;
 
   return (
@@ -55,6 +77,11 @@ function CardList(props: IProps) {
         {content}
         {spinner}
       </ul>
+      <Pagination
+        numberOfPages={numberOfPages}
+        handlePageNums={handlePageNums}
+        currentPage={currentPage}
+      />
     </>
   );
 }

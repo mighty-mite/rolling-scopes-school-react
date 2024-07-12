@@ -4,10 +4,10 @@ class Service {
   searchProducts = async (query: string, offset = 0) => {
     try {
       const res = await fetch(
-        `${this.apiBase}/search?q=${query}&limit=30&skip=${offset}`
+        `${this.apiBase}/search?q=${query}&limit=10&skip=${offset}`
       );
       const json = await res.json();
-      return json.products;
+      return json;
     } catch (e) {
       throw new Error("not workin");
     }
