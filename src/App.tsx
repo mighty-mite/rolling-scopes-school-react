@@ -1,21 +1,16 @@
-import { useState } from "react";
+import { Route, Routes } from "react-router";
 
-import CardList from "./components/cardlist/CardList";
-import Searchbar from "./components/searchbar/Searchbar";
-import useLocalStorage from "./hooks/useLocalStorage";
+import Details from "./components/details/Details";
+import Layout from "./components/layout/Layout";
 
 export default function App() {
-  const [text, setText] = useState("");
-  const [storageVal] = useLocalStorage();
-
-  const onType = (query: string) => {
-    setText(query);
-  };
-
   return (
     <div className="app">
-      <Searchbar onType={onType} />
-      <CardList searchQuery={text || storageVal} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="details/:id" element={<Details />} />
+        </Route>
+      </Routes>
     </div>
   );
 }

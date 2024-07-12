@@ -30,9 +30,9 @@ function Details() {
   });
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
-  const service = new Service();
 
   useEffect(() => {
+    const service = new Service();
     setDetails({ title: "", brand: "", thumbnail: "" });
     setLoading(true);
     if (id)

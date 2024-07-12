@@ -62,3 +62,26 @@ h6 {
 }
 
 /* END - CSS Reset */
+
+.app {
+  display: flex;
+}
+
+.right {
+  overflow: hidden;
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.details {
+  width: 40%;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #0000007f;
+  transform: translate(-100%);
+}
