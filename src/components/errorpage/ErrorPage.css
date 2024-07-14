@@ -1,0 +1,29 @@
+.error__heading {
+  text-align: center;
+}
+
+.error__link {
+  display: block;
+  margin: 0 auto;
+  width: 250px;
+
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 6px 32px;
+  min-height: 56px;
+  font-size: 16px;
+  line-height: 24px;
+  box-sizing: border-box;
+  border: none;
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  background-color: #2091f9;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
