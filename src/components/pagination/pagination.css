@@ -14,10 +14,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  &:hover {
-    color: #8ec2f2;
-    border-color: #8ec2f2;
-  }
+}
+
+.pagination__button:hover {
+  color: #8ec2f2;
+  border-color: #8ec2f2;
 }
 
 .pagination__button:not(:last-child) {
