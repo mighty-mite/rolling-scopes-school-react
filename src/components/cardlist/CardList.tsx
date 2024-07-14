@@ -39,7 +39,6 @@ function CardList(props: IProps) {
     setLoading(true);
     service.searchProducts(searchQuery, offset).then(data => {
       onCardsLoaded(data.products);
-      console.log(data.total);
       setNumberOfPages(Math.ceil(data.total / 10));
       setSearchParams({ page: String(currentPage) });
     });
@@ -74,7 +73,7 @@ function CardList(props: IProps) {
   return (
     <>
       <ul className="cardlist">
-        {content}
+        {content.length === 0 ? "sorry, no such items" : content}
         {spinner}
       </ul>
       <Pagination
