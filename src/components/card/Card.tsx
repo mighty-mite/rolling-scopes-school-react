@@ -16,11 +16,17 @@ function Card(props: Props) {
   const { thumbnail, description, title, id } = props;
   const theme = useContext(ThemeContext);
   return (
-    <Link className={`card ${theme}`} to={`/details/${id}`}>
-      <img className="card__image" src={thumbnail} width="100" alt={title} />
-      <h4 className="card__name">{title}</h4>
-      <div className="card__description">{description}</div>
-    </Link>
+    <div className="card">
+      <Link className={`card__link ${theme}`} to={`/details/${id}`}>
+        <img className="card__image" src={thumbnail} width="100" alt={title} />
+        <h4 className="card__name">{title}</h4>
+        <div className="card__description">{description}</div>
+      </Link>
+      <label className={`card__checkbox ${theme}`}>
+        Choose Me
+        <input type="checkbox" />
+      </label>
+    </div>
   );
 }
 

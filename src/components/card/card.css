@@ -1,19 +1,32 @@
 .card {
   transition: all ease-in-out 0.3s;
 
-  list-style: none;
-  cursor: pointer;
   border-radius: 5px;
-  padding: 10px;
-  text-decoration: none;
-  color: black;
 }
 
-.card.dark {
+.card__link {
+  padding: 10px;
+  list-style: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.card__link.dark {
   color: white;
 }
 
 .card__image {
   border-radius: 50px;
   height: 100px;
+}
+
+.card__checkbox {
+  margin-top: 20px;
+  color: black;
+}
+
+.card__checkbox.dark {
+  color: white;
 }
