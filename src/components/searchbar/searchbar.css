@@ -19,6 +19,11 @@
   outline: 1px solid #2091f9;
 }
 
+.searchbar input.dark {
+  background-color: rgba(0, 0, 0, 0.25);
+  color: white;
+}
+
 .searchbar button {
   width: 155px;
   height: 52px;

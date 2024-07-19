@@ -1,5 +1,9 @@
 import "./pagination.css";
 
+import { useContext } from "react";
+
+import ThemeContext from "@/themeContext/themeContext";
+
 interface IProps {
   numberOfPages: number;
   handlePageNums: (pageNumber: number) => void;
@@ -9,6 +13,8 @@ interface IProps {
 function Pagination(props: IProps) {
   const { numberOfPages, handlePageNums, currentPage } = props;
 
+  const theme = useContext(ThemeContext);
+
   const btns = [...Array(numberOfPages).keys()]
     .map(i => i + 1)
     .map(num => {
@@ -17,7 +23,7 @@ function Pagination(props: IProps) {
       return (
         <button
           key={num}
-          className="pagination__num pagination__page-button"
+          className={`pagination__num pagination__page-button ${theme}`}
           type="button"
           style={pageStyle}
           onClick={() => handlePageNums(num)}

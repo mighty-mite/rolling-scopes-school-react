@@ -11,3 +11,12 @@
   margin: 0 auto;
   padding-top: 60px;
 }
+
+.app {
+  position: relative;
+  min-height: 100vh;
+}
+
+.app.dark {
+  background-color: rgb(1, 2, 79);
+}

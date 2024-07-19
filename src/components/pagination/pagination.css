@@ -1,24 +1,11 @@
+[data-theme="dark"] {
+  --pagination-background: rgb(44, 45, 86);
+}
+
 .pagination {
   display: flex;
   justify-content: center;
   margin-top: 30px;
-}
-
-.pagination__button {
-  width: 50px;
-  height: 40px;
-  background: white;
-  border: 1px solid #252b42;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.pagination__button:hover {
-  color: #8ec2f2;
-  border-color: #8ec2f2;
 }
 
 .pagination__button:not(:last-child) {
@@ -43,8 +30,12 @@
   font-size: 16px;
   line-height: 16px;
   letter-spacing: 0.2px;
-  color: #252b42;
   cursor: pointer;
+  background-color: white;
+}
+
+.pagination__page-button.dark {
+  background-color: rgb(91, 93, 206);
 }
 
 .pagination__page-button:hover {

@@ -1,8 +1,9 @@
 import "./searchbar.css";
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 
 import useLocalStorage from "@/hooks/useLocalStorage";
+import ThemeContext from "@/themeContext/themeContext";
 
 interface IProps {
   onType: (query: string) => void;
@@ -10,6 +11,7 @@ interface IProps {
 
 function Searchbar(props: IProps) {
   const [storageVal, setStorageVal] = useLocalStorage();
+  const theme = useContext(ThemeContext);
 
   useEffect(() => {
     setStorageVal(storageVal);
@@ -26,7 +28,7 @@ function Searchbar(props: IProps) {
       <input
         value={storageVal}
         type="text"
-        className="search-input"
+        className={`search-input ${theme}`}
         placeholder="type here"
         onChange={e => {
           setStorageVal(e.target.value);

@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
+import "./details.css";
+
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+
+import ThemeContext from "@/themeContext/themeContext";
 
 import Service from "./../service/Service";
 import Spinner from "./../spinner/Spinner";
@@ -12,8 +16,10 @@ interface IDetails {
 
 function View(props: IDetails) {
   const { title, brand, thumbnail } = props;
+  const theme = useContext(ThemeContext);
+
   return (
-    <div className="details">
+    <div className={`details ${theme}`}>
       <Link to="/">close</Link>
       <div className="title">{title}</div>
       <div className="brand">{brand}</div>
