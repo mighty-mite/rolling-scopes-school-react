@@ -3,17 +3,12 @@ import "./cardlist.css";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
+import { ICard } from "@/types";
+
 import Card from "../card/Card";
 import Pagination from "../pagination/Pagination";
 import Spinner from "../spinner/Spinner";
 import { useGetCardsQuery } from "./cardListSlice";
-
-interface ICard {
-  description: string;
-  id: number;
-  thumbnail: string;
-  title: string;
-}
 
 interface IProps {
   searchQuery: string;
