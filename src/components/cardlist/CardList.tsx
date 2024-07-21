@@ -1,12 +1,12 @@
 import "./cardlist.css";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import Card from "../card/Card";
 import Pagination from "../pagination/Pagination";
-import Service from "../service/Service";
 import Spinner from "../spinner/Spinner";
+import { useGetCardsQuery } from "./cardListSlice";
 
 interface ICard {
   description: string;
@@ -21,37 +21,23 @@ interface IProps {
 
 function CardList(props: IProps) {
   const { searchQuery } = props;
-  const service = useMemo(() => new Service(), []);
-  const [cards, setCards] = useState<ICard[]>([]);
-  const [loading, setLoading] = useState(true);
 
   const [offset, setOffset] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [, setSearchParams] = useSearchParams();
 
-  const onCardsLoaded = (cards: ICard[]) => {
-    setLoading(false);
-    setCards(cards);
-  };
+  const {
+    data: response = { limit: 0, products: [], skip: 0, total: 0 },
+    isLoading,
+  } = useGetCardsQuery({ searchQuery, offset });
 
   useEffect(() => {
-    setLoading(true);
-    service.searchProducts(searchQuery, offset).then(data => {
-      onCardsLoaded(data.products);
-      setNumberOfPages(Math.ceil(data.total / 10));
-      setSearchParams({ page: String(currentPage) });
-    });
-  }, [
-    searchQuery,
-    service,
-    numberOfPages,
-    setSearchParams,
-    currentPage,
-    offset,
-  ]);
+    setNumberOfPages(Math.ceil(response.total / 10));
+    setSearchParams({ page: String(currentPage) });
+  }, [currentPage, response.total, setSearchParams]);
 
-  const content = cards.map(item => {
+  const content = response.products.map((item: ICard) => {
     return (
       <Card
         key={item.id}
@@ -68,7 +54,7 @@ function CardList(props: IProps) {
     setCurrentPage(pageNumber);
   };
 
-  const spinner = loading ? <Spinner /> : null;
+  const spinner = isLoading ? <Spinner /> : null;
 
   return (
     <>
@@ -76,11 +62,13 @@ function CardList(props: IProps) {
         {content.length === 0 ? "sorry, no such items" : content}
         {spinner}
       </ul>
-      <Pagination
-        numberOfPages={numberOfPages}
-        handlePageNums={handlePageNums}
-        currentPage={currentPage}
-      />
+      {numberOfPages <= 1 ? null : (
+        <Pagination
+          numberOfPages={numberOfPages}
+          handlePageNums={handlePageNums}
+          currentPage={currentPage}
+        />
+      )}
     </>
   );
 }
