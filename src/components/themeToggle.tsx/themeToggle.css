@@ -3,3 +3,8 @@
   left: 20px;
   top: 20px;
 }
+
+select.dark {
+  background-color: black;
+  color: white;
+}
