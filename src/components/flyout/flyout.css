@@ -6,3 +6,13 @@
   margin-top: 20px;
   gap: 20px;
 }
+
+.flyout.dark {
+  color: white;
+}
+
+.flyout__unselect.dark,
+.flyout__donwload.dark {
+  background-color: rgb(91, 93, 206);
+  color: white;
+}

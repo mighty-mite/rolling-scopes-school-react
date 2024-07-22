@@ -1,12 +1,15 @@
 import "./flyout.css";
 
+import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch, RootState } from "@/store/store";
+import ThemeContext from "@/themeContext/themeContext";
 
 import { unselectAll } from "./flyoutSlice";
 
 function Flyout() {
+  const theme = useContext(ThemeContext);
   const dispatch = useDispatch<AppDispatch>();
 
   const items = useSelector((state: RootState) => {
@@ -18,12 +21,12 @@ function Flyout() {
   };
 
   return (
-    <div className="flyout">
+    <div className={`flyout ${theme}`}>
       <span className="flyout__header">Items selected: {items}</span>
-      <button className="flyout__unselect" onClick={handleUnselect}>
+      <button className={`flyout__unselect ${theme}`} onClick={handleUnselect}>
         Unselect all
       </button>
-      <button className="flyout__donwload">Donwload</button>
+      <button className={`flyout__donwload ${theme}`}>Donwload</button>
     </div>
   );
 }
