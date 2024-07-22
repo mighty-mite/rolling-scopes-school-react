@@ -13,10 +13,18 @@ const selectedItemsSlice = createSlice({
     itemAdded: (state, action: PayloadAction<ICard>) => {
       state.selected.push(action.payload);
     },
+    itemRemoved: (state, action: PayloadAction<number>) => {
+      state.selected = state.selected.filter(
+        item => item.id !== action.payload
+      );
+    },
+    unselectAll: state => {
+      state.selected = [];
+    },
   },
 });
 
 const { actions, reducer } = selectedItemsSlice;
 
-export const { itemAdded } = actions;
+export const { itemAdded, itemRemoved, unselectAll } = actions;
 export default reducer;
