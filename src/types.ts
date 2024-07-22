@@ -4,3 +4,6 @@ export interface ICard {
   thumbnail: string;
   title: string;
 }
+export interface SelectedItemsState {
+  selected: ICard[];
+}
