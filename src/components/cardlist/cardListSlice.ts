@@ -8,7 +8,10 @@ export const cardListSlice = createApi({
       query: ({ searchQuery, offset }) =>
         `/search?q=${searchQuery}&limit=10&skip=${offset}`,
     }),
+    getSingleCard: builder.query({
+      query: ({ id }) => `/${id}`,
+    }),
   }),
 });
 
-export const { useGetCardsQuery } = cardListSlice;
+export const { useGetCardsQuery, useGetSingleCardQuery } = cardListSlice;

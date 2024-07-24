@@ -1,11 +1,11 @@
 import "./details.css";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import ThemeContext from "@/themeContext/themeContext";
 
-import Service from "./../service/Service";
+import { useGetSingleCardQuery } from "./../cardlist/cardListSlice";
 import Spinner from "./../spinner/Spinner";
 
 interface IDetails {
@@ -29,34 +29,22 @@ function View(props: IDetails) {
 }
 
 function Details() {
-  const [details, setDetails] = useState<IDetails>({
-    title: "",
-    brand: "",
-    thumbnail: "",
-  });
-  const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
-  useEffect(() => {
-    const service = new Service();
-    setDetails({ title: "", brand: "", thumbnail: "" });
-    setLoading(true);
-    if (id)
-      service.getSingleProduct(id).then(data => {
-        setDetails(data);
-        setLoading(false);
-      });
-  }, [id]);
+  const {
+    data: response = { title: "", brand: "", thumbnail: "" },
+    isLoading,
+  } = useGetSingleCardQuery({ id });
 
   const content = (
     <View
-      title={details.title}
-      brand={details.brand}
-      thumbnail={details.thumbnail}
+      title={response.title}
+      brand={response.brand}
+      thumbnail={response.thumbnail}
     />
   );
 
-  const spinner = loading ? <Spinner /> : null;
+  const spinner = isLoading ? <Spinner /> : null;
 
   return (
     <section className="right">
