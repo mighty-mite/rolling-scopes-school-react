@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 import ThemeContext from "@/themeContext/themeContext";
 
-interface IProps {
+export interface IProps {
   numberOfPages: number;
   handlePageNums: (pageNumber: number) => void;
   currentPage: number;
@@ -26,6 +26,7 @@ function Pagination(props: IProps) {
           className={`pagination__num pagination__page-button ${theme}`}
           type="button"
           style={pageStyle}
+          aria-label="pagination-button"
           onClick={() => handlePageNums(num)}
         >
           {num}

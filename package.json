@@ -12,8 +12,8 @@
     "format:fix": "prettier . --write --ignore-path .gitignore && git update-index --again",
     "lint": "eslint . --ext .ts,.tsx --fix --ignore-path .gitignore",
     "prepare": "husky install",
+    "test": "jest",
     "test:unit": "jest --watch",
-    "test:unit:ci": "jest",
     "test:unit:coverage": "jest --silent --watchAll=false --coverage",
     "typecheck": "tsc --noEmit"
   },
