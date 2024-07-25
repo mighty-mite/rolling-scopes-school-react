@@ -87,3 +87,7 @@ h6 {
   background-color: #0000007f;
   transform: translate(-100%);
 }
+
+.container {
+  margin: 0 auto;
+}

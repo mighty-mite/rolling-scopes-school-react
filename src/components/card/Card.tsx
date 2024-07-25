@@ -10,14 +10,13 @@ import ThemeContext from "@/themeContext/themeContext";
 import { itemAdded, itemRemoved } from "../flyout/flyoutSlice";
 
 interface Props {
-  description: string;
   thumbnail: string;
   title: string;
   id: number;
 }
 
 function Card(props: Props) {
-  const { thumbnail, description, title, id } = props;
+  const { thumbnail, title, id } = props;
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -36,7 +35,7 @@ function Card(props: Props) {
     const newIsSelected = !isSelected;
     setIsSelected(newIsSelected);
     if (newIsSelected) {
-      dispatch(itemAdded({ id, title, description, thumbnail }));
+      dispatch(itemAdded({ id, title, thumbnail }));
     } else {
       dispatch(itemRemoved(id));
     }
@@ -47,7 +46,6 @@ function Card(props: Props) {
       <Link className={`card__link ${theme}`} to={`/details/${id}`}>
         <img className="card__image" src={thumbnail} width="100" alt={title} />
         <h4 className="card__name">{title}</h4>
-        <div className="card__description">{description}</div>
       </Link>
       <label className={`card__checkbox ${theme}`}>
         Choose Me
