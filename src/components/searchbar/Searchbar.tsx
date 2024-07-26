@@ -1,6 +1,6 @@
 import "./searchbar.css";
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import useLocalStorage from "@/hooks/useLocalStorage";
 import ThemeContext from "@/themeContext/themeContext";
@@ -12,6 +12,7 @@ interface IProps {
 function Searchbar(props: IProps) {
   const [storageVal, setStorageVal] = useLocalStorage();
   const theme = useContext(ThemeContext);
+  const [inputValue, setInputValue] = useState(storageVal);
 
   useEffect(() => {
     setStorageVal(storageVal);
@@ -19,20 +20,23 @@ function Searchbar(props: IProps) {
 
   const handleClick = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    setStorageVal(inputValue);
     const { onType } = props;
     onType(storageVal);
+  };
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
   };
 
   return (
     <form className="searchbar">
       <input
-        value={storageVal}
+        value={inputValue}
         type="text"
         className={`search-input ${theme}`}
         placeholder="type here"
-        onChange={e => {
-          setStorageVal(e.target.value);
-        }}
+        onChange={handleInput}
       />
       <button type="submit" onClick={handleClick}>
         Search
