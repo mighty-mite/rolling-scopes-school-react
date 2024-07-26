@@ -42,7 +42,7 @@ function Card(props: Props) {
   };
 
   return (
-    <div className="card">
+    <li className="card">
       <Link className={`card__link ${theme}`} to={`/details/${id}`}>
         <img className="card__image" src={thumbnail} width="100" alt={title} />
         <h4 className="card__name">{title}</h4>
@@ -51,7 +51,7 @@ function Card(props: Props) {
         Choose Me
         <input checked={isSelected} type="checkbox" onChange={handleChange} />
       </label>
-    </div>
+    </li>
   );
 }
 
