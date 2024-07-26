@@ -1,6 +1,6 @@
 import "./searchbar.css";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import useLocalStorage from "@/hooks/useLocalStorage";
 import ThemeContext from "@/themeContext/themeContext";
@@ -14,15 +14,11 @@ function Searchbar(props: IProps) {
   const theme = useContext(ThemeContext);
   const [inputValue, setInputValue] = useState(storageVal);
 
-  useEffect(() => {
-    setStorageVal(storageVal);
-  }, [setStorageVal, storageVal]);
-
   const handleClick = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setStorageVal(inputValue);
     const { onType } = props;
-    onType(storageVal);
+    onType(inputValue);
   };
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
