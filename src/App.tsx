@@ -19,7 +19,7 @@ export default function App() {
   return (
     <ReduxProvider store={store}>
       <Provider value={theme}>
-        <div className={`app ${theme}`}>
+        <div data-testid="application" className={`app ${theme}`}>
           <ThemeToggle changeTheme={(arg: string) => setTheme(arg)} />
           <Routes>
             <Route path="/" element={<Layout />}>

@@ -16,6 +16,7 @@ function ThemeToggle(props: IProps) {
   };
   return (
     <select
+      data-testid="theme-toggle"
       className={`theme-toggle ${theme}`}
       id="theme-toggle"
       onChange={handleChange}
