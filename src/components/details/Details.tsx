@@ -9,20 +9,20 @@ import { useGetSingleCardQuery } from "./../cardlist/cardListSlice";
 import Spinner from "./../spinner/Spinner";
 
 interface IDetails {
-  brand: string;
+  warrantyInformation: string;
   thumbnail: string;
   title: string;
 }
 
 function View(props: IDetails) {
-  const { title, brand, thumbnail } = props;
+  const { title, warrantyInformation, thumbnail } = props;
   const theme = useContext(ThemeContext);
 
   return (
     <div className={`details ${theme}`}>
       <Link to="/">close</Link>
       <div className="title">{title}</div>
-      <div className="brand">{brand}</div>
+      <div className="brand">{warrantyInformation}</div>
       <img src={thumbnail} alt="" width="300" />
     </div>
   );
@@ -32,14 +32,14 @@ function Details() {
   const { id } = useParams();
 
   const {
-    data: response = { title: "", brand: "", thumbnail: "" },
+    data: response = { title: "", warrantyInformation: "", thumbnail: "" },
     isLoading,
   } = useGetSingleCardQuery({ id });
 
   const content = (
     <View
       title={response.title}
-      brand={response.brand}
+      warrantyInformation={response.warrantyInformation}
       thumbnail={response.thumbnail}
     />
   );
@@ -47,11 +47,11 @@ function Details() {
   const spinner = isLoading ? <Spinner /> : null;
 
   return (
-    <section className="right">
+    <article className="right">
       {content}
       {spinner}
       <Link className="overlay" to="/" />
-    </section>
+    </article>
   );
 }
 
