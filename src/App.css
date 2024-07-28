@@ -1,0 +1,22 @@
+.main {
+  text-align: center;
+  color: #2c3e50;
+}
+
+.main p {
+  margin: 16px 0;
+}
+
+.logo {
+  margin: 0 auto;
+  padding-top: 60px;
+}
+
+.app {
+  position: relative;
+  min-height: 100vh;
+}
+
+.app.dark {
+  background-color: rgb(1, 2, 79);
+}
